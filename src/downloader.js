@@ -1,9 +1,12 @@
 const { spawn } = require("child_process");
 const path = require("path");
+const os = require("os");
+
+const DOWNLOADS_DIR = path.join(os.homedir(), "Downloads");
 
 function downloadVideo(url, formatId, options = {}) {
   return new Promise((resolve, reject) => {
-    const outputDir = options.outputDir || process.cwd();
+    const outputDir = options.outputDir || DOWNLOADS_DIR;
     const outputTemplate = options.outputTemplate || "%(title)s.%(ext)s";
     const outputPath = path.join(outputDir, outputTemplate);
 
@@ -71,7 +74,7 @@ function downloadVideo(url, formatId, options = {}) {
 
 function downloadVideoWithMerge(url, formatId, options = {}) {
   return new Promise((resolve, reject) => {
-    const outputDir = options.outputDir || process.cwd();
+    const outputDir = options.outputDir || DOWNLOADS_DIR;
     const outputTemplate = options.outputTemplate || "%(title)s.%(ext)s";
     const outputPath = path.join(outputDir, outputTemplate);
 

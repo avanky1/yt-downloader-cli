@@ -21,7 +21,7 @@ function downloadVideo(url, formatId, options = {}) {
       url,
     ];
 
-    console.log("\n📥 Starting download...\n");
+    console.log("\nStarting download...\n");
 
     const ytdlp = spawn("yt-dlp", args);
 
@@ -94,7 +94,7 @@ function downloadVideoWithMerge(url, formatId, options = {}) {
       url,
     ];
 
-    console.log("\n📥 Starting download...\n");
+    console.log("\nStarting download...\n");
 
     const ytdlp = spawn("yt-dlp", args);
 

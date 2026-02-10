@@ -108,9 +108,9 @@ function formatFileSize(bytes) {
 }
 
 function displayFormats(formats, videoTitle) {
-  console.log("\n" + "═".repeat(60));
-  console.log(`📹 ${videoTitle}`);
-  console.log("═".repeat(60));
+  console.log("\n" + "=".repeat(60));
+  console.log(`${videoTitle}`);
+  console.log("=".repeat(60));
   console.log("\nAvailable qualities (all include audio):\n");
 
   formats.forEach((format, index) => {
@@ -122,7 +122,7 @@ function displayFormats(formats, videoTitle) {
     console.log(`  ${num}. ${quality} | ${ext} | ${size}`);
   });
 
-  console.log("\n" + "─".repeat(60));
+  console.log("\n" + "-".repeat(60));
 }
 
 function getFormatId(formats, selection) {

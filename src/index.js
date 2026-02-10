@@ -13,14 +13,14 @@ const {
 const { downloadVideoWithMerge } = require("./downloader");
 
 async function main() {
-  console.log("\n🎬 yt-dlp Video Downloader CLI");
-  console.log("─".repeat(40));
+  console.log("\nyt-dlp Video Downloader CLI");
+  console.log("-".repeat(40));
 
   const url = await promptForUrl();
 
   if (!isValidYouTubeUrl(url)) {
     console.error(
-      "\n❌ Invalid YouTube URL. Please provide a valid YouTube video link.",
+      "\nInvalid YouTube URL. Please provide a valid YouTube video link.",
     );
     console.error("   Examples:");
     console.error("   - https://www.youtube.com/watch?v=dQw4w9WgXcQ");
@@ -28,13 +28,13 @@ async function main() {
     process.exit(1);
   }
 
-  console.log("\n⏳ Fetching video information...");
+  console.log("\nFetching video information...");
 
   let metadata;
   try {
     metadata = await fetchVideoMetadata(url);
   } catch (err) {
-    console.error(`\n❌ Failed to fetch video info: ${err.message}`);
+    console.error(`\nFailed to fetch video info: ${err.message}`);
     process.exit(1);
   }
 
@@ -42,14 +42,14 @@ async function main() {
   const formats = metadata.formats;
 
   if (!formats || formats.length === 0) {
-    console.error("\n❌ No formats found for this video.");
+    console.error("\nNo formats found for this video.");
     process.exit(1);
   }
 
   const filteredFormats = filterFormats(formats);
 
   if (filteredFormats.length === 0) {
-    console.error("\n❌ No suitable video formats found for this video.");
+    console.error("\nNo suitable video formats found for this video.");
     process.exit(1);
   }
 
@@ -59,7 +59,7 @@ async function main() {
   try {
     selection = await promptForQualityWithRetry(filteredFormats.length);
   } catch (err) {
-    console.error(`\n❌ ${err.message}`);
+    console.error(`\n${err.message}`);
     process.exit(1);
   }
 
@@ -67,20 +67,20 @@ async function main() {
   const formatId = getFormatId(filteredFormats, selection);
 
   console.log(
-    `\n✅ Selected: ${selectedFormat.quality} (${selectedFormat.ext}) - Format ID: ${formatId}`,
+    `\nSelected: ${selectedFormat.quality} (${selectedFormat.ext}) - Format ID: ${formatId}`,
   );
 
   try {
     const outputFile = await downloadVideoWithMerge(url, formatId);
 
-    console.log("\n" + "═".repeat(60));
-    console.log("✅ Download complete!");
+    console.log("\n" + "=".repeat(60));
+    console.log("Download complete!");
     if (outputFile && outputFile !== "Download completed") {
-      console.log(`📁 Saved to: ${outputFile}`);
+      console.log(`Saved to: ${outputFile}`);
     }
-    console.log("═".repeat(60) + "\n");
+    console.log("=".repeat(60) + "\n");
   } catch (err) {
-    console.error(`\n❌ Download failed: ${err.message}`);
+    console.error(`\nDownload failed: ${err.message}`);
     process.exit(1);
   }
 }

@@ -11,7 +11,7 @@ function promptForUrl() {
   return new Promise((resolve) => {
     const rl = createReadlineInterface();
 
-    rl.question("\n🔗 Paste a YouTube video URL: ", (answer) => {
+    rl.question("\nPaste a YouTube video URL: ", (answer) => {
       rl.close();
       resolve(answer.trim());
     });
@@ -37,7 +37,7 @@ function promptForQuality(maxOption) {
   return new Promise((resolve) => {
     const rl = createReadlineInterface();
 
-    rl.question(`\n📥 Select quality (1-${maxOption}): `, (answer) => {
+    rl.question(`\nSelect quality (1-${maxOption}): `, (answer) => {
       rl.close();
       const selection = parseInt(answer.trim(), 10);
       resolve(selection);
@@ -64,7 +64,7 @@ async function promptForQualityWithRetry(maxOption, maxRetries = 3) {
 
     if (remaining > 0) {
       console.log(
-        `\n⚠️  Invalid selection. Please enter a number between 1 and ${maxOption}. (${remaining} attempts remaining)`,
+        `\nInvalid selection. Please enter a number between 1 and ${maxOption}. (${remaining} attempts remaining)`,
       );
     }
   }

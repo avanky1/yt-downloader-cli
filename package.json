@@ -1,0 +1,25 @@
+{
+  "name": "ytdlp-cli",
+  "version": "1.0.0",
+  "description": "A CLI tool for downloading YouTube videos using yt-dlp",
+  "main": "src/index.js",
+  "bin": {
+    "ytdlp-cli": "./bin/ytdlp-cli.js"
+  },
+  "scripts": {
+    "start": "node bin/ytdlp-cli.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "youtube",
+    "yt-dlp",
+    "video",
+    "downloader",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,10 +1,24 @@
 const { spawn } = require("child_process");
+const { getYtdlpPath } = require("./ytdlp-path");
 
 function fetchVideoMetadata(url) {
   return new Promise((resolve, reject) => {
+    const ytdlpBin = getYtdlpPath();
+
+    if (!ytdlpBin) {
+      reject(
+        new Error(
+          "yt-dlp is not installed.\n" +
+            "Run: npm install -g ytpull (to auto-download yt-dlp)\n" +
+            "Or install manually: pip install yt-dlp",
+        ),
+      );
+      return;
+    }
+
     const args = ["-J", "--no-warnings", "--no-playlist", url];
 
-    const ytdlp = spawn("yt-dlp", args);
+    const ytdlp = spawn(ytdlpBin, args);
 
     let stdout = "";
     let stderr = "";
@@ -18,16 +32,7 @@ function fetchVideoMetadata(url) {
     });
 
     ytdlp.on("error", (err) => {
-      if (err.code === "ENOENT") {
-        reject(
-          new Error(
-            "yt-dlp is not installed or not found in PATH.\n" +
-              "Install it from: https://github.com/yt-dlp/yt-dlp#installation",
-          ),
-        );
-      } else {
-        reject(new Error(`Failed to spawn yt-dlp: ${err.message}`));
-      }
+      reject(new Error(`Failed to run yt-dlp: ${err.message}`));
     });
 
     ytdlp.on("close", (code) => {

@@ -1,6 +1,6 @@
 {
   "name": "ytpull",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI tool for downloading YouTube videos using yt-dlp",
   "main": "src/index.js",
   "bin": {
@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node bin/ytdlp.js",
+    "postinstall": "node src/setup.js",
     "test": "echo \"No tests yet\" && exit 0"
   },
   "keywords": [

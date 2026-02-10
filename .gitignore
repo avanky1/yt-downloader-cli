@@ -4,3 +4,7 @@ node_modules/
 *.webm
 *.part
 *.ytdl
+
+# Downloaded yt-dlp binaries
+bin/yt-dlp
+bin/yt-dlp.exe

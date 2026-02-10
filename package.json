@@ -1,13 +1,13 @@
 {
   "name": "ytdlp-cli",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A CLI tool for downloading YouTube videos using yt-dlp",
   "main": "src/index.js",
   "bin": {
-    "ytdlp-cli": "./bin/ytdlp-cli.js"
+    "ytdlp-cli": "bin/ytdlp.js"
   },
   "scripts": {
-    "start": "node bin/ytdlp-cli.js",
+    "start": "node bin/ytdlp.js",
     "test": "echo \"No tests yet\" && exit 0"
   },
   "keywords": [

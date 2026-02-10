@@ -1,4 +1,4 @@
-# ytdlp-cli
+# ytpull
 
 A local CLI tool for downloading YouTube videos using [yt-dlp](https://github.com/yt-dlp/yt-dlp).
 
@@ -14,10 +14,10 @@ A local CLI tool for downloading YouTube videos using [yt-dlp](https://github.co
 ## Folder Structure
 
 ```
-ytdlp-cli/
+ytpull/
 ├── package.json          # Project metadata, scripts, and bin entry
 ├── bin/
-│   └── ytdlp-cli.js      # CLI entry point (executable)
+│   └── ytdlp.js          # CLI entry point (executable)
 ├── src/
 │   ├── index.js          # Main orchestrator - coordinates the full flow
 │   ├── prompt.js         # User input handling via readline
@@ -68,13 +68,13 @@ ytdlp-cli/
 ### Option 1: Install from npm (recommended)
 
 ```bash
-npm install -g ytdlp-cli
+npm install -g ytpull
 ```
 
 After installation, run from anywhere:
 
 ```bash
-ytdlp-cli
+ytpull
 ```
 
 ### Option 2: Install from GitHub
@@ -88,7 +88,7 @@ cd yt-downloader-cli
 npm install -g .
 
 # Now run from anywhere
-ytdlp-cli
+ytpull
 ```
 
 ### Option 3: Run without installing
@@ -101,27 +101,27 @@ cd yt-downloader-cli
 # Run directly
 npm start
 # or
-node bin/ytdlp-cli.js
+node bin/ytdlp.js
 ```
 
 ### Option 4: Use npx (no install needed)
 
 ```bash
-npx ytdlp-cli
+npx ytpull
 ```
 
 ## Uninstall
 
 ```bash
-npm uninstall -g ytdlp-cli
+npm uninstall -g ytpull
 ```
 
 ## Usage Example
 
 ```
-$ node bin/ytdlp-cli.js
+$ ytpull
 
-🎬 yt-dlp Video Downloader CLI
+yt-dlp Video Downloader CLI
 ────────────────────────────────────────
 
 🔗 Paste a YouTube video URL: https://www.youtube.com/watch?v=dQw4w9WgXcQ

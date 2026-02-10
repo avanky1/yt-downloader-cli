@@ -11,10 +11,10 @@ const {
   getSelectedFormat,
 } = require("./formatter");
 const { downloadVideoWithMerge } = require("./downloader");
+const { showBanner } = require("./banner");
 
 async function main() {
-  console.log("\nyt-dlp Video Downloader CLI");
-  console.log("-".repeat(40));
+  showBanner();
 
   const url = await promptForUrl();
 

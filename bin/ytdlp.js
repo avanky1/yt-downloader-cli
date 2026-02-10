@@ -9,11 +9,8 @@ if (args.includes("-v") || args.includes("--version")) {
 }
 
 if (args.includes("-h") || args.includes("--help")) {
-  console.log("ytpull - Download YouTube videos from the terminal\n");
-  console.log("Usage: ytpull [options]\n");
-  console.log("Options:");
-  console.log("  -v, --version  Show version number");
-  console.log("  -h, --help     Show this help message");
+  const { showHelp } = require("../src/banner");
+  showHelp();
   process.exit(0);
 }
 

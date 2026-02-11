@@ -14,6 +14,18 @@ if (args.includes("-h") || args.includes("--help")) {
   process.exit(0);
 }
 
+if (args.includes("--history")) {
+  const { displayHistory } = require("../src/history");
+  displayHistory();
+  process.exit(0);
+}
+
+if (args.includes("--clear-history")) {
+  const { clearHistory } = require("../src/history");
+  clearHistory();
+  process.exit(0);
+}
+
 const { main } = require("../src/index");
 
 main().catch((err) => {

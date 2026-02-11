@@ -72,10 +72,22 @@ async function promptForQualityWithRetry(maxOption, maxRetries = 3) {
   throw new Error("Maximum retry attempts exceeded. Please restart the CLI.");
 }
 
+function promptYesNo(question) {
+  return new Promise((resolve) => {
+    const rl = createReadlineInterface();
+    rl.question(`\n${question} (y/n): `, (answer) => {
+      rl.close();
+      const normalized = answer.trim().toLowerCase();
+      resolve(normalized === "y" || normalized === "yes");
+    });
+  });
+}
+
 module.exports = {
   promptForUrl,
   isValidYouTubeUrl,
   promptForQuality,
   isValidSelection,
   promptForQualityWithRetry,
+  promptYesNo,
 };

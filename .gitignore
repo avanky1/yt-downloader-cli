@@ -8,3 +8,5 @@ node_modules/
 # Downloaded yt-dlp binaries
 bin/yt-dlp
 bin/yt-dlp.exe
+TODO.md
+

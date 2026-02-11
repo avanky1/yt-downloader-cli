@@ -11,7 +11,7 @@ const ASCII_ART = `
 
 function showBanner() {
   console.log(chalk.cyan(ASCII_ART));
-  console.log(chalk.dim("                        made by avanish\n"));
+  console.log(chalk.dim("        made by avanish\n"));
 
   const description = boxen(
     chalk.white(
@@ -32,8 +32,10 @@ function showHelp() {
   showBanner();
   console.log(chalk.bold("Usage:") + " ytpull [options]\n");
   console.log(chalk.bold("Options:"));
-  console.log("  -v, --version  Show version number");
-  console.log("  -h, --help     Show this help message\n");
+  console.log("  -v, --version        Show version number");
+  console.log("  -h, --help           Show this help message");
+  console.log("  --history            Show download history");
+  console.log("  --clear-history      Clear download history\n");
 }
 
 module.exports = { showBanner, showHelp };

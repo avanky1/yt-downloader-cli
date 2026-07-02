@@ -9,6 +9,19 @@ const QUALITY_PRIORITIES = [
   "144p",
 ];
 
+// Standard height buckets — normalize nearby heights to these values
+const STANDARD_HEIGHTS = [2160, 1440, 1080, 720, 480, 360, 240, 144];
+
+function normalizeHeight(height) {
+  // Find the closest standard height (within 10% tolerance)
+  for (const std of STANDARD_HEIGHTS) {
+    if (Math.abs(height - std) <= std * 0.1) {
+      return std;
+    }
+  }
+  return height;
+}
+
 function filterFormats(formats) {
   if (!Array.isArray(formats) || formats.length === 0) {
     return [];
@@ -18,17 +31,19 @@ function filterFormats(formats) {
     const hasVideo = f.vcodec && f.vcodec !== "none";
     const hasResolution = f.height || f.resolution;
     const notStoryboard = !f.format_note?.toLowerCase().includes("storyboard");
+    const notPremiumOnly = !f.format_note?.toLowerCase().includes("premium");
 
-    return hasVideo && hasResolution && notStoryboard;
+    return hasVideo && hasResolution && notStoryboard && notPremiumOnly;
   });
 
   const qualityMap = new Map();
 
   for (const format of videoFormats) {
-    const height =
+    const rawHeight =
       format.height || extractHeightFromResolution(format.resolution);
-    if (!height) continue;
+    if (!rawHeight) continue;
 
+    const height = normalizeHeight(rawHeight);
     const qualityKey = `${height}p`;
     const existing = qualityMap.get(qualityKey);
 
@@ -64,16 +79,7 @@ function extractHeightFromResolution(resolution) {
 }
 
 function shouldReplaceFormat(existing, candidate) {
-  const candidateHasAudio = candidate.acodec && candidate.acodec !== "none";
-  const existingHasAudio = existing.hasAudio;
-
-  if (candidateHasAudio && !existingHasAudio) {
-    return true;
-  }
-  if (!candidateHasAudio && existingHasAudio) {
-    return false;
-  }
-
+  // Prefer mp4 container
   const candidateIsMp4 = candidate.ext === "mp4";
   const existingIsMp4 = existing.ext === "mp4";
 
@@ -84,6 +90,7 @@ function shouldReplaceFormat(existing, candidate) {
     return false;
   }
 
+  // Prefer higher bitrate (better quality) — audio is merged separately
   const candidateTbr = candidate.tbr || 0;
   const existingTbr = existing.tbr || 0;
 

@@ -15,7 +15,7 @@ function showBanner() {
 
   const description = boxen(
     chalk.white(
-      "Interactive CLI to download YouTube videos\nwith quality selection using yt-dlp",
+      "Easily download YouTube videos\nin any quality",
     ),
     {
       padding: 1,

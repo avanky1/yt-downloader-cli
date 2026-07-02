@@ -33,6 +33,36 @@ function isValidYouTubeUrl(url) {
   return patterns.some((pattern) => pattern.test(url));
 }
 
+function isPlaylistUrl(url) {
+  if (!url || typeof url !== "string") {
+    return false;
+  }
+  // Match YouTube playlist URLs
+  const playlistPatterns = [
+    /[?&]list=([a-zA-Z0-9_-]+)/,
+    /youtube\.com\/playlist\?list=([a-zA-Z0-9_-]+)/,
+  ];
+  return playlistPatterns.some((pattern) => pattern.test(url));
+}
+
+function promptPlaylistOrSingle() {
+  return new Promise((resolve) => {
+    const rl = createReadlineInterface();
+    rl.question(
+      "\nThis appears to be a playlist. Download (p)laylist or (s)ingle video? ",
+      (answer) => {
+        rl.close();
+        const normalized = answer.trim().toLowerCase();
+        if (normalized === "p" || normalized === "playlist") {
+          resolve("playlist");
+        } else {
+          resolve("single");
+        }
+      },
+    );
+  });
+}
+
 function promptForQuality(maxOption) {
   return new Promise((resolve) => {
     const rl = createReadlineInterface();
@@ -86,6 +116,8 @@ function promptYesNo(question) {
 module.exports = {
   promptForUrl,
   isValidYouTubeUrl,
+  isPlaylistUrl,
+  promptPlaylistOrSingle,
   promptForQuality,
   isValidSelection,
   promptForQualityWithRetry,

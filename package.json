@@ -8,8 +8,7 @@
   },
   "scripts": {
     "start": "node bin/ytdlp.js",
-    "postinstall": "node src/setup.js",
-    "test": "node test.js"
+    "postinstall": "node src/setup.js"
   },
   "keywords": [
     "youtube",
